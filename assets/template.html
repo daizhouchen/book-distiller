@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{TITLE}} · 读书蒸馏</title>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --ink-light: #4a4a4a;
+    --ink-muted: #8a8a8a;
+    --xuan: #f9f5ec;
+    --xuan-light: #fcfaf4;
+    --xuan-deep: #f5efe3;
+    --zhusha: #8b3a3a;
+    --zhusha-light: #c26d6d;
+    --songshi: #5b7a6a;
+    --dan-jin: #b89b66;
+    --max-w: 36em;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "方正书宋", "宋体", STSong, SimSun, serif;
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--ink);
+    background: linear-gradient(180deg, var(--xuan) 0%, var(--xuan-deep) 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  /* 顶部 · 三入口 */
+  .mode-nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--xuan);
+    border-bottom: 1px solid rgba(139, 58, 58, 0.15);
+    padding: 1em 2em;
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+  }
+  .mode-nav button {
+    font-family: inherit;
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: var(--ink-light);
+    cursor: pointer;
+    padding: 0.4em 1em;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    letter-spacing: 0.1em;
+  }
+  .mode-nav button:hover { color: var(--zhusha); }
+  .mode-nav button.active {
+    color: var(--zhusha);
+    border-bottom-color: var(--zhusha);
+  }
+
+  /* 主容器 */
+  article {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 6em 2em 8em;
+  }
+  @media (max-width: 720px) {
+    article { padding: 3em 1.2em 5em; }
+  }
+
+  /* 标题层级 */
+  h1.book-title {
+    font-size: clamp(40px, 7vw, 64px);
+    text-align: center;
+    margin: 3em 0 0.3em;
+    letter-spacing: 0.2em;
+    font-weight: normal;
+    color: var(--ink);
+  }
+  .book-author {
+    text-align: center;
+    color: var(--ink-muted);
+    font-size: 15px;
+    margin-bottom: 3em;
+    letter-spacing: 0.2em;
+  }
+  .motif-line {
+    text-align: center;
+    font-size: 22px;
+    color: var(--zhusha);
+    font-family: "Kaiti SC", "KaiTi", serif;
+    margin: 2em 0 1em;
+    letter-spacing: 0.1em;
+  }
+  .memory-hook {
+    text-align: center;
+    font-size: 18px;
+    color: var(--ink-light);
+    font-style: italic;
+    margin-bottom: 2em;
+  }
+  .memory-hook::before { content: "「 "; color: var(--zhusha-light); }
+  .memory-hook::after { content: " 」"; color: var(--zhusha-light); }
+
+  h2.chapter {
+    font-size: clamp(36px, 5vw, 48px);
+    text-align: center;
+    margin: 4em 0 2em;
+    letter-spacing: 0.15em;
+    font-weight: normal;
+    color: var(--zhusha);
+    position: relative;
+  }
+  h2.chapter::before, h2.chapter::after {
+    content: "";
+    display: block;
+    width: 2em;
+    height: 1px;
+    background: var(--zhusha-light);
+    margin: 0.6em auto;
+  }
+
+  h3.section {
+    font-size: 28px;
+    margin: 2.5em 0 1em;
+    font-weight: normal;
+    border-left: 3px solid var(--zhusha);
+    padding-left: 0.8em;
+    color: var(--ink);
+  }
+  h4.subsection {
+    font-size: 20px;
+    margin: 1.8em 0 0.8em;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  p { margin: 0 0 1.2em; }
+  p + p { text-indent: 2em; }
+  article > section > p:first-of-type { text-indent: 0; }
+
+  /* 引用/分析块 */
+  .quote-original {
+    font-family: "Kaiti SC", "KaiTi", "STKaiti", "楷体", serif;
+    background: var(--xuan-light);
+    padding: 1.2em 1.8em;
+    border-left: 3px solid var(--zhusha);
+    margin: 1.5em 0;
+    font-size: 15.5px;
+    color: var(--ink-light);
+    line-height: 2.0;
+  }
+  .quote-original::before {
+    content: "【原】";
+    font-family: inherit;
+    color: var(--zhusha);
+    font-weight: 600;
+    margin-right: 0.4em;
+  }
+  .quote-analysis::before {
+    content: "【析】";
+    color: var(--zhusha);
+    font-weight: 600;
+    margin-right: 0.4em;
+  }
+  .quote-analysis {
+    padding: 1em 0;
+  }
+
+  /* 双栏对照 */
+  .quote-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.8em;
+    margin: 2em 0;
+    align-items: start;
+  }
+  @media (max-width: 720px) {
+    .quote-pair { grid-template-columns: 1fr; }
+  }
+  .quote-pair .quote-original {
+    margin: 0;
+    height: 100%;
+  }
+  .quote-pair .quote-analysis {
+    padding: 0.6em 0;
+  }
+
+  /* 对照小字（他山之石） */
+  .counterpoint {
+    margin: 1.4em 0;
+    padding: 0.9em 1.2em;
+    border-left: 2px solid var(--dan-jin);
+    background: rgba(184, 155, 102, 0.04);
+    font-size: 15.5px;
+    color: var(--ink-light);
+  }
+  .counterpoint::before {
+    content: "【对照】";
+    color: var(--dan-jin);
+    font-weight: 600;
+    margin-right: 0.4em;
+  }
+
+  /* SVG 图 */
+  .figure-wrap {
+    margin: 3em auto;
+    text-align: center;
+  }
+  .figure-wrap svg {
+    max-width: 100%;
+    height: auto;
+  }
+  .figure-caption {
+    margin-top: 0.6em;
+    font-size: 14px;
+    color: var(--ink-muted);
+    font-family: "Kaiti SC", serif;
+  }
+
+  /* 事实矩阵表格 */
+  table.fact-matrix {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2em 0;
+    font-size: 15px;
+  }
+  table.fact-matrix th, table.fact-matrix td {
+    padding: 0.8em 1em;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid rgba(139, 58, 58, 0.15);
+  }
+  table.fact-matrix th {
+    color: var(--zhusha);
+    font-weight: normal;
+    background: rgba(139, 58, 58, 0.03);
+  }
+  table.fact-matrix td { color: var(--ink-light); }
+
+  /* 三重结构容器 */
+  .three-layer {
+    margin: 2em 0;
+  }
+  .layer {
+    margin: 1.2em 0;
+    padding: 1em 1.3em;
+    border-radius: 2px;
+    background: var(--xuan-light);
+    border-left: 3px solid transparent;
+  }
+  .layer-facts   { border-left-color: var(--songshi); }
+  .layer-mech    { border-left-color: var(--dan-jin); }
+  .layer-view    { border-left-color: var(--zhusha); }
+  .layer-label {
+    display: inline-block;
+    margin-bottom: 0.4em;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+  }
+
+  /* 金句 */
+  .golden-quote {
+    text-align: center;
+    font-family: "Kaiti SC", serif;
+    font-size: 18px;
+    margin: 1.8em 0;
+    color: var(--ink);
+    padding: 0 1em;
+    position: relative;
+  }
+  .golden-quote::before, .golden-quote::after {
+    color: var(--zhusha-light);
+    font-size: 24px;
+  }
+  .golden-quote::before { content: "「"; margin-right: 0.2em; }
+  .golden-quote::after  { content: "」"; margin-left: 0.2em; }
+  .golden-quote-source {
+    display: block;
+    margin-top: 0.3em;
+    font-size: 13px;
+    color: var(--ink-muted);
+    font-family: inherit;
+  }
+
+  /* 可折叠工具箱 */
+  details.toolbox {
+    margin: 2em 0;
+    padding: 1.2em 1.5em;
+    background: rgba(139, 58, 58, 0.03);
+    border: 1px solid rgba(139, 58, 58, 0.1);
+    border-radius: 2px;
+  }
+  details.toolbox summary {
+    cursor: pointer;
+    color: var(--zhusha);
+    letter-spacing: 0.1em;
+    outline: none;
+  }
+  details.toolbox ul {
+    margin-top: 1em;
+    padding-left: 1.4em;
+  }
+  details.toolbox li {
+    margin: 0.5em 0;
+    color: var(--ink-light);
+    font-size: 15px;
+  }
+
+  /* 信源构成 */
+  .source-meta {
+    max-width: var(--max-w);
+    margin: 0 auto 3em;
+    padding: 1.2em 1.6em;
+    background: var(--xuan-light);
+    border: 1px solid rgba(139, 58, 58, 0.1);
+    font-size: 14px;
+    color: var(--ink-light);
+  }
+  .source-meta h5 {
+    margin: 0 0 0.8em;
+    color: var(--zhusha);
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    font-weight: normal;
+  }
+  .source-meta .source-row {
+    display: flex;
+    gap: 1em;
+    margin: 0.3em 0;
+  }
+  .source-meta .source-bar {
+    flex: 1;
+    height: 12px;
+    background: var(--xuan);
+    border: 1px solid rgba(139, 58, 58, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  .source-meta .source-bar::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    background: var(--zhusha);
+  }
+  .source-meta .source-bar.a::before { background: var(--zhusha); }
+  .source-meta .source-bar.b::before { background: var(--dan-jin); }
+  .source-meta .source-bar.c::before { background: var(--songshi); }
+  .source-meta .source-bar.d::before { background: var(--ink-muted); }
+
+  /* 误读/盲点 */
+  .misreading, .blindspot {
+    margin: 1.5em 0;
+    padding: 1em 1.3em;
+    background: var(--xuan-light);
+    border-left: 3px solid var(--dan-jin);
+  }
+  .misreading dt, .blindspot dt {
+    color: var(--zhusha);
+    font-weight: 600;
+    margin-top: 0.6em;
+  }
+  .misreading dd, .blindspot dd {
+    margin: 0.3em 0 0.8em;
+    color: var(--ink-light);
+  }
+
+  /* 模式切换显示 */
+  .mode-brief .精读-only, .mode-brief .深读-only { display: none; }
+  .mode-intermediate .深读-only { display: none; }
+
+  /* 分隔符 */
+  .separator {
+    text-align: center;
+    margin: 3em 0;
+    color: var(--zhusha-light);
+    letter-spacing: 1em;
+  }
+  .separator::before { content: "· · ·"; }
+
+  /* 思想坐标 */
+  .coord-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5em;
+    margin: 2em 0;
+  }
+  .coord-card {
+    padding: 1em 1.3em;
+    background: var(--xuan-light);
+    border-top: 2px solid var(--zhusha);
+  }
+  .coord-card h6 {
+    margin: 0 0 0.6em;
+    color: var(--zhusha);
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    font-weight: normal;
+  }
+  .coord-card ul {
+    margin: 0;
+    padding-left: 1.3em;
+    font-size: 15px;
+    color: var(--ink-light);
+  }
+
+  /* 页脚 */
+  footer.doc-foot {
+    max-width: var(--max-w);
+    margin: 5em auto 2em;
+    padding: 2em 2em;
+    text-align: center;
+    color: var(--ink-muted);
+    font-size: 13px;
+    border-top: 1px solid rgba(139, 58, 58, 0.1);
+  }
+
+  /* 章节号汉字装饰 */
+  .chapter-num {
+    display: block;
+    font-size: 0.7em;
+    color: var(--zhusha-light);
+    margin-bottom: 0.3em;
+    letter-spacing: 0.3em;
+  }
+
+  /* 三层结构标签显示 */
+  .layer-facts .layer-label::before { content: "·事实层· "; color: var(--songshi); }
+  .layer-mech  .layer-label::before { content: "·机制层· "; color: var(--dan-jin); }
+  .layer-view  .layer-label::before { content: "·观点层· "; color: var(--zhusha); }
+
+  /* 响应式字号 */
+  @media (max-width: 720px) {
+    body { font-size: 16px; }
+    .quote-pair { gap: 1em; }
+  }
+</style>
+</head>
+<body class="mode-full">
+
+<nav class="mode-nav">
+  <button onclick="setMode('brief')">📖 速读 · 15 分钟</button>
+  <button onclick="setMode('intermediate')">📘 精读 · 一小时</button>
+  <button class="active" onclick="setMode('full')">📚 深读 · 全本</button>
+</nav>
+
+<article>
+
+<h1 class="book-title">{{TITLE}}</h1>
+<p class="book-author">{{AUTHOR}}</p>
+
+<p class="motif-line">{{MOTIF}}</p>
+<p class="memory-hook">{{MEMORY_HOOK}}</p>
+
+<div class="source-meta">
+  <h5>信源构成 · 置信度自评</h5>
+  {{SOURCE_META_HTML}}
+</div>
+
+{{#LENS_NOTE}}
+<div class="source-meta">
+  <h5>本次视角</h5>
+  <p style="margin:0;">{{LENS_NOTE}}</p>
+</div>
+{{/LENS_NOTE}}
+
+<section class="overview 速读-always">
+  <h2 class="chapter"><span class="chapter-num">卷首</span>全貌</h2>
+  <div class="figure-wrap">
+    {{OVERVIEW_SVG}}
+  </div>
+</section>
+
+<section class="fact-matrix-sec 精读-only 深读-only">
+  <h2 class="chapter"><span class="chapter-num">贰</span>事实矩阵</h2>
+  <div class="figure-wrap">
+    {{FACT_MATRIX_SVG}}
+  </div>
+  {{FACT_MATRIX_TABLE}}
+</section>
+
+<section class="modules-sec 精读-only 深读-only">
+  {{MODULES_HTML}}
+</section>
+
+<section class="quotes-sec 速读-always">
+  <h2 class="chapter"><span class="chapter-num">肆</span>金句</h2>
+  {{GOLDEN_QUOTES_HTML}}
+</section>
+
+<section class="misread-sec 深读-only">
+  <h2 class="chapter"><span class="chapter-num">伍</span>误读陷阱</h2>
+  {{MISREADINGS_HTML}}
+</section>
+
+<section class="blind-sec 深读-only">
+  <h2 class="chapter"><span class="chapter-num">陆</span>时代的茧</h2>
+  {{BLINDSPOTS_HTML}}
+</section>
+
+<section class="coord-sec 深读-only">
+  <h2 class="chapter"><span class="chapter-num">柒</span>思想坐标</h2>
+  <div class="coord-grid">
+    {{THOUGHT_COORDINATES_HTML}}
+  </div>
+</section>
+
+<section class="toolbox-sec 深读-only">
+  <h2 class="chapter"><span class="chapter-num">附</span>思考工具箱</h2>
+  <details class="toolbox">
+    <summary>本文思考时用过的框架（点击展开）</summary>
+    <ul>
+      {{TOOLBOX_HTML}}
+    </ul>
+  </details>
+</section>
+
+<footer class="doc-foot">
+  <p>——</p>
+  <p>事实支撑观点 · 揭示系统逻辑 · 事实陈述本身也要系统化</p>
+  <p>Book Distiller · 读书蒸馏</p>
+</footer>
+
+</article>
+
+<script>
+function setMode(mode) {
+  document.body.className = 'mode-' + mode;
+  document.querySelectorAll('.mode-nav button').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{
+  "skill_name": "book-distiller",
+  "evals": [
+    {
+      "id": 1,
+      "name": "jinpingmei",
+      "prompt": "用 book-distiller 给我蒸馏《金瓶梅》，生成完整的典雅风 HTML 报告。西门庆为人处世的方方面面都要覆盖到，不能只讲一个侧面。按 SKILL.md 的完整九步流程执行，最后把 distill.json 和 HTML 文件路径报告给我。",
+      "expected_output": "生成 distill.json + <book>.html 到 book-distiller-workspace/jinpingmei/ 目录；HTML 含三入口、原文对照、事实矩阵、误读陷阱、作者盲点等完整结构；事实密度 ≥ 2/千字；正文无框架名；母题为人物+系统结构",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "yuanyuan-jiushizhu",
+      "prompt": "用 book-distiller 蒸馏《遥远的救世主》。重点要讲清楚丁元英是怎么打格律诗那场商战的——从立项、设计、到最后乐圣反诉的整个过程都要系统地剖开。按 SKILL.md 走完整流程。",
+      "expected_output": "生成完整 HTML；重点展示商战的博弈链；不能只讲某一步；有事实矩阵、推导链、误读陷阱；正文不出现框架名",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "wuhe-zhizhong",
+      "prompt": "用 book-distiller 蒸馏《乌合之众》。这是纯论证型书，要把勒庞的核心命题、证据系统、反例和边界都给我讲清楚。",
+      "expected_output": "生成完整 HTML；论证地图 SVG；每个命题三重结构；反例与边界模块；误读陷阱（常见的政治化误读）",
+      "files": []
+    },
+    {
+      "id": 4,
+      "name": "renlei-jianshi",
+      "prompt": "用 book-distiller 蒸馏《人类简史》。这是宏大叙事，要把三大革命的整体逻辑、关键节点、多视角都系统化组织出来。",
+      "expected_output": "生成完整 HTML；时间轴 SVG；关键节点按偶然+必然+蝴蝶效应剖析；揭示想象共同体的系统逻辑",
+      "files": []
+    },
+    {
+      "id": 5,
+      "name": "feibaoli-goutong",
+      "prompt": "用 book-distiller 蒸馏《非暴力沟通》。这是工具书，要把四步模型、适用/失效情境、实操剧本都完整产出。特别要把模型的边界讲清楚——在哪些情境下它不适用。",
+      "expected_output": "生成完整 HTML；模型全图 SVG；每步三重结构；适用/失效矩阵；至少 2 个实操剧本；诚实暴露模型的哲学预设与边界",
+      "files": []
+    }
+  ]
+}

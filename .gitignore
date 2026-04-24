@@ -1,0 +1,24 @@
+# 测试产出
+../book-distiller-workspace/
+/book-distiller-workspace/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.pytest_cache/
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# 环境
+.env
+venv/
+.venv/
