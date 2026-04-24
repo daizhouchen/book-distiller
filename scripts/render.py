@@ -22,6 +22,39 @@ def esc(s):
     return html.escape(str(s))
 
 
+def normalize_svg(svg_str):
+    """归一化 SVG：去掉内联 width/height/style，让 CSS 接管尺寸。
+    保留 viewBox（否则无法缩放）。"""
+    if not svg_str or "<svg" not in svg_str:
+        return svg_str
+    # 定位 <svg ... > 开头标签
+    m = re.search(r'<svg\b([^>]*)>', svg_str, flags=re.IGNORECASE)
+    if not m:
+        return svg_str
+    attrs = m.group(1)
+    # 去掉固定的 width/height 属性
+    attrs = re.sub(r'\s(width|height)\s*=\s*["\']?[^"\'\s>]+["\']?', '', attrs, flags=re.IGNORECASE)
+    # 去掉 style 里与尺寸相关的条目，保留其他样式
+    def strip_size_style(m2):
+        style = m2.group(1)
+        parts = [p.strip() for p in style.split(';') if p.strip()]
+        kept = []
+        for p in parts:
+            k = p.split(':')[0].strip().lower()
+            if k in ('width', 'max-width', 'min-width', 'height', 'max-height', 'min-height'):
+                continue
+            kept.append(p)
+        if not kept:
+            return ''
+        return f' style="{"; ".join(kept)}"'
+    attrs = re.sub(r'\s*style\s*=\s*"([^"]*)"', strip_size_style, attrs, flags=re.IGNORECASE)
+    attrs = re.sub(r"\s*style\s*=\s*'([^']*)'", strip_size_style, attrs, flags=re.IGNORECASE)
+    # 确保有 preserveAspectRatio（居中、不裁剪）
+    if 'preserveAspectRatio' not in attrs:
+        attrs += ' preserveAspectRatio="xMidYMid meet"'
+    return svg_str[:m.start()] + f'<svg{attrs}>' + svg_str[m.end():]
+
+
 def render_source_meta(source_mix):
     """渲染信源构成条形图。"""
     if not source_mix:
@@ -312,9 +345,9 @@ def render(distill):
         lens_note = f"本次产出视角：<strong>{esc(lens)}</strong>。{esc(lens_reason)}"
 
     memory_hook = distill.get("memory_hook", "")
-    overview_svg = distill.get("overview_svg", "")
+    overview_svg = normalize_svg(distill.get("overview_svg", ""))
     fact_matrix = distill.get("fact_matrix", {})
-    fact_matrix_svg = fact_matrix.get("viz_svg", "") if isinstance(fact_matrix, dict) else ""
+    fact_matrix_svg = normalize_svg(fact_matrix.get("viz_svg", "") if isinstance(fact_matrix, dict) else "")
     fact_matrix_table = render_fact_matrix_table(fact_matrix) if isinstance(fact_matrix, dict) else ""
 
     modules_html = "\n".join(render_module(m, i) for i, m in enumerate(distill.get("modules", [])))
