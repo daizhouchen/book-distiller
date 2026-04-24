@@ -70,12 +70,17 @@
 # 抓取信源（生成抓取计划）
 python3 scripts/fetch_sources.py "书名" "作者"
 
-# 渲染 distill.json → HTML
+# 渲染 distill.json → HTML（会自动归一化 SVG 尺寸）
 python3 scripts/render.py workspace/book/distill.json workspace/book/book.html
 
-# 质量检查
+# 质量检查 · 内容层（密度/禁词/框架名）
 python3 scripts/quality_check.py workspace/book/distill.json
+
+# 视觉级自检 · 渲染层（三模式差异化/SVG尺寸/板块齐全）
+python3 scripts/visual_check.py workspace/book/book.html
 ```
+
+**两闸门规则**：`quality_check.py` 把关内容质量，`visual_check.py` 把关呈现质量。都通过才算合格——任一闸门绿灯不代表另一个绿灯。
 
 ## 文件结构
 
@@ -106,8 +111,9 @@ book-distiller/
 │   └── template.html                     # 典雅风单文件模板
 ├── scripts/
 │   ├── fetch_sources.py                  # 多源抓取 + 信源分级
-│   ├── render.py                         # distill.json → HTML
-│   └── quality_check.py                  # 密度+禁词+框架名自检
+│   ├── render.py                         # distill.json → HTML（含 SVG 归一化）
+│   ├── quality_check.py                  # 内容层自检（密度+禁词+框架名）
+│   └── visual_check.py                   # 视觉级自检（三模式差异化+SVG+板块）
 ├── evals/
 │   └── evals.json                        # 测试用书单
 └── README.md
