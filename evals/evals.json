@@ -1,39 +1,48 @@
 {
   "skill_name": "book-distiller",
+  "version": "v2.1-deepening",
+  "v2.1_threshold_notes": "v2.1 加深版统一硬下限（不再分档）：模块 ≥10、单模块 ≥4500 字（人物/场景重模块 ≥6000）、原文锚点总数 ≥50（巨著 ≥80）、单条原文 original ≥100 字（巨著场景类 ≥150 字）、误读 ≥6、盲点 ≥6、金句 ≥12、思想坐标四维各 ≥4、推导链 ≥4 步、distill.json ≥120KB（巨著 ≥200KB）、深读/精读 ≥1.35×、可视化 ≥3 种、章节级覆盖 ≥12 回（中等 ≥8；主题级降级 ≥8 主题）、scene_dissections（适用书）≥5、character_dossiers（适用书）≥5（巨著 ≥10）、poetics_dossiers（适用书）≥3",
   "evals": [
     {
       "id": 1,
       "name": "jinpingmei",
       "prompt": "用 book-distiller 给我蒸馏《金瓶梅》，生成完整的典雅风 HTML 报告。西门庆为人处世的方方面面都要覆盖到，不能只讲一个侧面。按 SKILL.md 的完整九步流程执行，最后把 distill.json 和 HTML 文件路径报告给我。",
-      "expected_output": "生成 distill.json + <book>.html 到 book-distiller-workspace/jinpingmei/ 目录；HTML 含三入口、原文对照、事实矩阵、误读陷阱、作者盲点等完整结构；事实密度 ≥ 2/千字；正文无框架名；母题为人物+系统结构",
+      "expected_output": "生成 distill.json + jinpingmei.html 到 ~/workspace/jinpingmei/；distill.json ≥120KB；模块 ≥10（每模块 ≥4500 字、人物/场景重模块 ≥6000）；原文锚点总数 ≥50，单条 original ≥100 字（场景类 ≥150 字）；误读 ≥6 / 盲点 ≥6 / 金句 ≥12；推导链 ≥4 步；事实矩阵 cells ≥20 每个带锚点；可视化类型 ≥3（事实矩阵 + 关系图/时间轴/流变图等任选 ≥2）；学派论争 ≥3 派；版本对照 ≥5（词话本 vs 崇祯本 vs 张评本）；章节级覆盖 ≥12 回（每回 interpretation ≥600 字）；作者立场解构 evidence ≥3；思想坐标四维各 ≥4；scene_dissections ≥5（西门庆与潘金莲药铺初遇、葡萄架、烧夜香等关键场景，每场 ≥1000 字、五层拆解齐备）；character_dossiers ≥10（西门庆/潘金莲/李瓶儿/庞春梅/吴月娘/孟玉楼/陈经济等，每条 ≥600 字、八字段齐备）；poetics_dossiers ≥3（词曲选段含形式分析、内容分析、互文锚点、命运预告）；正文无框架名；母题为人物+系统结构；事实密度 ≥2/千字；深读/精读 ≥1.35×",
       "files": []
     },
     {
       "id": 2,
       "name": "yuanyuan-jiushizhu",
       "prompt": "用 book-distiller 蒸馏《遥远的救世主》。重点要讲清楚丁元英是怎么打格律诗那场商战的——从立项、设计、到最后乐圣反诉的整个过程都要系统地剖开。按 SKILL.md 走完整流程。",
-      "expected_output": "生成完整 HTML；重点展示商战的博弈链；不能只讲某一步；有事实矩阵、推导链、误读陷阱；正文不出现框架名",
+      "expected_output": "生成 distill.json + yuanyuan-jiushizhu.html；distill.json ≥120KB；模块 ≥10（每模块 ≥4500 字）；原文锚点 ≥50，单条 original ≥100 字；推导链 ≥4 步/模块（商战博弈链每步必显式）；误读 ≥6 / 盲点 ≥6 / 金句 ≥12；思想坐标四维各 ≥4；作者立场解构必填（豆豆的商业-哲学-文学跨界立场，evidence ≥3）；scene_dissections ≥5（古城重逢、王庙村扶贫立项、北京见叶晓明、乐圣总裁办对峙、林雨峰自尽等关键场景，每场 ≥1000 字）；character_dossiers ≥5（丁元英、芮小丹、林雨峰、肖亚文、叶晓明等，每条 ≥600 字）；poetics_dossiers 可空（书中无诗词承担叙事功能）；可视化类型 ≥3（关系图：商战利益方网络 + 时间轴：商战节点 + 事实矩阵）；正文不出现框架名",
       "files": []
     },
     {
       "id": 3,
       "name": "wuhe-zhizhong",
       "prompt": "用 book-distiller 蒸馏《乌合之众》。这是纯论证型书，要把勒庞的核心命题、证据系统、反例和边界都给我讲清楚。",
-      "expected_output": "生成完整 HTML；论证地图 SVG；每个命题三重结构；反例与边界模块；误读陷阱（常见的政治化误读）",
+      "expected_output": "生成 distill.json + wuhe-zhizhong.html；distill.json ≥120KB；模块 ≥10（每模块 ≥4500 字）；原文锚点 ≥50，单条 original ≥100 字；推导链 ≥4 步/模块；误读 ≥6（含常见的政治化误读）/ 盲点 ≥6（含种族论滤镜+实证局限）/ 金句 ≥12；思想坐标四维各 ≥4；作者立场解构必填（勒庞的法兰西第三共和保守派立场+生理决定论倾向）；scene_dissections ≥2（降级·例证场景：法国大革命公会场景、巴黎公社等勒庞举的具体群众事件）；character_dossiers 可空（论证书不强求人物聚合，可降级为 ≥3 思想家小传：勒庞 / 塔尔德 / 弗洛伊德对照）；poetics_dossiers 可空；章节级覆盖降级为主题级 ≥8 主题；可视化类型 ≥3（频谱图：群体心理立场谱 + 流变图：群体心理触发链 + 事实矩阵）；版本对照 ≥3（早版 vs 1903 增订版译本差异）；学派论争 ≥3（社会心理学派 / 精神分析派 / 当代群体动力学派 对勒庞命题的异议）",
       "files": []
     },
     {
       "id": 4,
       "name": "renlei-jianshi",
       "prompt": "用 book-distiller 蒸馏《人类简史》。这是宏大叙事，要把三大革命的整体逻辑、关键节点、多视角都系统化组织出来。",
-      "expected_output": "生成完整 HTML；时间轴 SVG；关键节点按偶然+必然+蝴蝶效应剖析；揭示想象共同体的系统逻辑",
+      "expected_output": "生成 distill.json + renlei-jianshi.html；distill.json ≥120KB；模块 ≥10（每模块 ≥4500 字）；原文锚点 ≥50，单条 original ≥100 字；推导链 ≥4 步/模块；误读 ≥6 / 盲点 ≥6 / 金句 ≥12；思想坐标四维各 ≥4；作者立场解构必填（赫拉利的世俗自由派+全球主义+生物科技乐观/悲观双面）；scene_dissections ≥3（降级·例证场景：标致汽车作为想象共同体的法人虚构、汉谟拉比法典 vs 美国独立宣言对照、农业革命的'小麦驯化人类'反叙事）；character_dossiers ≥3（思想家小传降级版：达尔文 / 哈拉尔德·韦尔斯 / 戴蒙德 等对赫拉利的影响关系）；poetics_dossiers 可空；章节级覆盖 ≥12 回（认知/农业/科学三大革命的关键章节，每回 interpretation ≥600 字）；可视化类型 ≥3（时间轴：7 万年大事件 + 流变图：智人取代尼安德特人的扩散树 + 事实矩阵）；学派论争 ≥3（生物决定论 vs 文化建构论 vs 技术乐观主义）",
       "files": []
     },
     {
       "id": 5,
       "name": "feibaoli-goutong",
       "prompt": "用 book-distiller 蒸馏《非暴力沟通》。这是工具书，要把四步模型、适用/失效情境、实操剧本都完整产出。特别要把模型的边界讲清楚——在哪些情境下它不适用。",
-      "expected_output": "生成完整 HTML；模型全图 SVG；每步三重结构；适用/失效矩阵；至少 2 个实操剧本；诚实暴露模型的哲学预设与边界",
+      "expected_output": "生成 distill.json + feibaoli-goutong.html；distill.json ≥120KB（工具书也按巨著档执行，密度转移到主干模块和主题级覆盖）；模块 ≥10（每模块 ≥4500 字）；原文锚点 ≥50，单条 original ≥100 字；推导链 ≥4 步/模块；误读 ≥6 / 盲点 ≥6 / 金句 ≥12；思想坐标四维各 ≥4（同题/对立/承继/回响）；作者立场解构必填（罗森堡的美式中产+临床心理学+非暴力运动背景，evidence ≥3）；scene_dissections ≥2（降级·实操剧本：书中关键的'孩子说粗话'、'伴侣加班晚归'等四步实操场景，每场拆到 OFNR 四步 + 失效边界）；character_dossiers 可空；poetics_dossiers 可空；学派/版本字段按 §4 适用性可空；章节级覆盖降级主题级 ≥8 主题；可视化类型 ≥3（关系图：OFNR 四步循环 + 流变图：冲突升级 vs NVC 干预对照 + 事实矩阵）",
+      "files": []
+    },
+    {
+      "id": 6,
+      "name": "hongloumeng",
+      "prompt": "用 book-distiller 蒸馏《红楼梦》。这是中国古典小说最重的标的，要把家族崩塌+情根难断的双线母题、四大家族结构、十二钗命运、版本差异、学派论争都系统覆盖。按 SKILL.md 完整九步流程执行。",
+      "expected_output": "生成 distill.json + hongloumeng.html 到 ~/workspace/hongloumeng/；distill.json ≥200KB（巨著档）；模块 ≥10（每模块 ≥4500 字、人物/场景重模块 ≥6000）；原文锚点总数 ≥80（巨著档），单条 original ≥100 字（场景类 ≥150 字）；推导链 ≥4 步/模块；误读 ≥6 / 盲点 ≥6 / 金句 ≥12；事实矩阵 cells ≥20 每个带锚点；学派论争 ≥4 派（脂评派 / 索隐派 / 考据派 / 文本批评派）；版本对照 ≥5（庚辰本 vs 程乙本 vs 戚序本 vs 蒙府本等的关键异文）；章节级覆盖 ≥12 回（每回 interpretation ≥600 字、呼应母题）；作者立场解构必填（曹雪芹的没落贵族立场 + 知识结构 + 写作动机暗影，evidence ≥3）；思想坐标四维各 ≥4；scene_dissections ≥8（葬花 / 抄检大观园 / 品茶栊翠庵 / 宝黛听曲 / 凹晶馆联诗 / 寿怡红夜宴 / 凤姐协理宁府 / 秦可卿托梦，每场 ≥1000 字、五层拆解齐备）；character_dossiers ≥10（金陵十二钗主体 + 宝玉、凤姐、王夫人等，每条 ≥600 字、八字段齐备）；poetics_dossiers ≥3（葬花词 / 姽婳词 / 菊花诗系列 或 终身误·枉凝眉等判词曲，每篇 ≥600 字）；可视化类型 ≥3（事实矩阵 + 四大家族关系网 + 命运时间轴/护官符流变图任选 ≥2）；深读/精读 ≥1.35×",
       "files": []
     }
   ]

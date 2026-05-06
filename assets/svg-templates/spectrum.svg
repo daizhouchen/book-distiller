@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" role="img" aria-label="立场光谱">
+  <style>
+    .sp-axis {
+      stroke: #1a1a1a;
+      stroke-width: 1;
+      fill: none;
+    }
+    .sp-tick {
+      stroke: #1a1a1a;
+      stroke-width: 1;
+      opacity: 0.4;
+    }
+    .sp-cap {
+      stroke: #b8281f;
+      stroke-width: 1.2;
+    }
+    .sp-pole-label {
+      font-family: "Kaiti SC", "KaiTi", "楷体", serif;
+      font-size: 16px;
+      fill: #b8281f;
+      letter-spacing: 0.08em;
+    }
+    .sp-pole-left { text-anchor: start; }
+    .sp-pole-right { text-anchor: end; }
+    .sp-pos-node {
+      fill: #f9f5ec;
+      stroke: #1a1a1a;
+      stroke-width: 1;
+    }
+    .sp-pos-node-key {
+      fill: #f9f5ec;
+      stroke: #b8281f;
+      stroke-width: 1.4;
+    }
+    .sp-pos-label {
+      font-family: "Songti SC", "宋体", "Noto Serif SC", serif;
+      font-size: 12.5px;
+      fill: #1a1a1a;
+      text-anchor: middle;
+    }
+  </style>
+
+  <!-- 主轴 -->
+  <line class="sp-axis" x1="80" y1="110" x2="720" y2="110"/>
+
+  <!-- 等距刻度 (装饰留白；五等分) -->
+  <line class="sp-tick" x1="240" y1="104" x2="240" y2="116"/>
+  <line class="sp-tick" x1="400" y1="100" x2="400" y2="120"/>
+  <line class="sp-tick" x1="560" y1="104" x2="560" y2="116"/>
+
+  <!-- 两端端帽 -->
+  <line class="sp-cap" x1="80" y1="92" x2="80" y2="128"/>
+  <line class="sp-cap" x1="720" y1="92" x2="720" y2="128"/>
+
+  <!-- 极端标签 -->
+  <text class="sp-pole-label sp-pole-left" x="80" y="68">{{LEFT_LABEL}}</text>
+  <text class="sp-pole-label sp-pole-right" x="720" y="68">{{RIGHT_LABEL}}</text>
+
+  <!-- 立场点 (placeholder · 由 render.py 用 {{POSITIONS}} 注入；含圆点 + 标签 + 可选连线) -->
+  {{POSITIONS}}
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" role="img" aria-label="时间轴">
+  <style>
+    .tl-axis { stroke: #1a1a1a; stroke-width: 1; fill: none; }
+    .tl-tick { stroke: #1a1a1a; stroke-width: 1; }
+    .tl-node { fill: #f9f5ec; stroke: #1a1a1a; stroke-width: 1; }
+    .tl-node-key { fill: #b8281f; stroke: #b8281f; stroke-width: 1; }
+    .tl-label {
+      font-family: "Songti SC", "宋体", "Noto Serif SC", serif;
+      font-size: 13px;
+      fill: #1a1a1a;
+      text-anchor: middle;
+    }
+    .tl-label-key {
+      font-family: "Kaiti SC", "KaiTi", "楷体", serif;
+      font-size: 14px;
+      fill: #b8281f;
+      text-anchor: middle;
+    }
+    .tl-cap { stroke: #c26d6d; stroke-width: 1; opacity: 0.5; }
+  </style>
+
+  <!-- 主轴 -->
+  <line class="tl-axis" x1="60" y1="100" x2="740" y2="100"/>
+  <!-- 两端朱砂端帽 -->
+  <line class="tl-cap" x1="60" y1="88" x2="60" y2="112"/>
+  <line class="tl-cap" x1="740" y1="88" x2="740" y2="112"/>
+
+  <!-- 节点 (placeholder · 由 render.py 用 {{NODES}} 注入) -->
+  {{NODES}}
+
+  <!-- 标签 (placeholder · 由 render.py 用 {{LABELS}} 注入) -->
+  {{LABELS}}
+</svg>

@@ -3,9 +3,20 @@ name: book-distiller
 description: Distill a book's essence into a single elegant Chinese-style HTML page that reveals the book's systematic logic through fact-supported reasoning. Use this skill whenever the user mentions distilling, summarizing, analyzing, extracting the essence of, or producing a study page for a specific book — even when they don't explicitly say "use this skill". Also use when the user wants to "蒸馏"/"提炼"/"解读"/"吃透"/"拆解"/"读书笔记" a book. Handles Chinese and foreign books, classic and modern, fiction and non-fiction. Produces a portable, offline, single-file HTML in elegant Chinese typography (典雅风). Works without access to the book text (falls back to web search + model knowledge with transparent source grading).
 ---
 
-# Book Distiller · 读书蒸馏
+# Book Distiller · 读书蒸馏（v2.2 加深版）
 
-你要做的事：**把一本书蒸馏成一张高质量中文典雅风网页**——事实支撑观点，揭示系统逻辑，事实陈述本身也要系统化。
+你要做的事：**把一本书蒸馏成一张高质量中文典雅风网页**——事实支撑观点，揭示系统逻辑，事实陈述本身也要系统化，**重点突出，分段可读**。
+
+> **v2.2 加深协议生效**——所有产物默认按 v2.2 加深版硬下限交付。具体条款见 `references/deepening-protocol.md`，涉及：模块数 **10-12**、单模块 **≥4500 字**（人物/场景重模块 ≥6000）、原文锚点 ≥50 总数（巨著 ≥80）/ 每模块 ≥6 / 单条 ≥100 字、误读盲点各 ≥6、思想坐标四维各 ≥4、推导链 **≥4 步**显式化、**8 个新字段**按适用性强制（学派论争 / 版本差异 / 作者立场解构 / 章节级覆盖 / 强化版思想坐标 + 场景细读 §2.6 / 人物小传 §2.7 / 诗词专题 §2.8）。
+>
+> **v2.2 新增 §10「重点突出与排版规范」**——长字段必须 ≥3/4/5 段（按字数）、推导链强制视觉列表、关键短语自动加重。详见 `references/deepening-protocol.md` §10。
+>
+> **v2.1 演进方向**（与 v2 比）：从"加维度"转向"加密度"——每模块字数翻倍、原文锚点翻倍、专题字段必填、推导链更详。**不再分档**——所有书统一按巨著档执行；工具书也按这个密度走，被拉长的部分会展现成清单 + 系统对照（而不是被强行注水）。
+>
+> **三个新字段**详见独立协议文档：
+> - 场景细读 → `references/scene-dissection-protocol.md`
+> - 人物小传 → `references/character-dossier-protocol.md`
+> - 诗词专题 → `references/poetics-dossier-protocol.md`
 
 ## 读书人格（Persona）
 
@@ -103,6 +114,8 @@ description: Distill a book's essence into a single elegant Chinese-style HTML p
 
 穷尽一切。这是红线。
 
+**v2.1 加深增量**：长书（>30 万字）必须做章节级扫描——为后续 `chapter_level_notes` 字段（§2.4 v2.1）准备 ≥**12** 个有母题相关性的回目锚点；中等长度书做主题级扫描 ≥**8** 主题。详见 `references/chapter-level-coverage.md`。**小说类必做场景级扫描 ≥8 个 candidate**（per §2.6 v2.1，为后续 `scene_dissections` 字段准备——最终筛选 ≥5 个进入产出，巨著 ≥8）。详见 `references/scene-dissection-protocol.md`。
+
 ### 步骤 5 · 事实系统化（四步法）⭐ 核心
 
 **这一步决定了产出是零散笔记还是真正的蒸馏**。详见 `references/fact-systematization.md`。
@@ -113,7 +126,9 @@ description: Distill a book's essence into a single elegant Chinese-style HTML p
 
 **5.3 跨维度交织**：看多个维度如何互相转化——**系统在交织中浮现**。
 
-**5.4 可视化**：生成矩阵/分类树/时间轴/频谱图，这是报告里真正的"事实骨架"。
+**5.4 可视化**：生成矩阵/分类树/时间轴/频谱图/关系图，这是报告里真正的"事实骨架"。
+
+**v2.1 加深增量**：事实矩阵 cells ≥ **20**（§1.8 v2.1），每个 cell 必须有具体锚点（章节/页码/事件）。除事实矩阵外，必须额外提供 ≥**2** 个其它可视化类型（per §1.17 v2.1，可视化类型 ≥3）——按基因选：人物/叙事基因 → 关系图 + 时间轴；论证/模型基因 → 流变图 + 频谱图；史料基因 → 时间轴必备。见 `assets/svg-templates/`。**v2.1 新增**：character_dossiers 必须**跨章节聚合**——同一人物的事实点在多个章节出现时，要在 dossier 里统一汇总成 fate_pattern（不是按章节分散记录）。详见 `references/character-dossier-protocol.md`。
 
 ### 步骤 6 · 骨架组装 → distill.json
 
@@ -182,6 +197,19 @@ description: Distill a book's essence into a single elegant Chinese-style HTML p
 
 **骨架组装后、填肉前，厚重书（>30 万字）可先把骨架给用户确认**，再进步骤 7。
 
+**v2.1 加深增量** · **8 个新字段**必须按适用性填或留空（不填会被 quality_check 警告）：
+
+- `schools_of_interpretation`（§2.1）—— 经典/古籍/思想史经典强制 ≥3 派；详见 `references/schools-and-versions.md`
+- `version_variants`（§2.2）—— 古籍多版本/重要译本之争强制 ≥5 处；详见 `references/schools-and-versions.md`
+- `author_position_deconstruction`（§2.3）—— **所有书强制**，evidence ≥3
+- `chapter_level_notes`（§2.4 v2.1）—— 长书强制 ≥**12 回**，每条 interpretation ≥**600 字**；中等长度书降级"主题级覆盖" ≥**8**；详见 `references/chapter-level-coverage.md`
+- `thought_coordinates`（§2.5 v2.1 强化版）—— **所有书强制**四维各 ≥**4** 条；详见 `references/thought-coordinates-protocol.md`
+- ⭐ **`scene_dissections`（§2.6 v2.1 新）**—— 小说/史书 STRICT ≥5 条（巨著 ≥8）；论证/美学（兼）DOWNGRADE ≥2；模型书 OPTIONAL；每条 ≥1000 字 5 层拆解；详见 `references/scene-dissection-protocol.md`
+- ⭐ **`character_dossiers`（§2.7 v2.1 新）**—— 小说/叙事/史书 STRICT ≥5 人（巨著 ≥10）；论证书 DOWNGRADE ≥3 思想家小传；模型/纯诗集 OPTIONAL；每条 ≥600 字 8 子字段；详见 `references/character-dossier-protocol.md`
+- ⭐ **`poetics_dossiers`（§2.8 v2.1 新）**—— 含诗词曲赋的书 STRICT ≥3 篇（古典美学/古典小说必触发）；现代纯叙事/工具书 OPTIONAL；每条 ≥600 字 8 子字段；详见 `references/poetics-dossier-protocol.md`
+
+适用性判定见 `references/deepening-protocol.md` §4（v2.1 新增 §4.4-§4.6）。红楼梦完整示范见 `references/examples/hongloumeng-skeleton.md`。
+
 ### 步骤 7 · 二阶段写作
 
 **读 `references/frameworks-internalization.md`**——这是产出质量的分水岭。
@@ -197,6 +225,21 @@ description: Distill a book's essence into a single elegant Chinese-style HTML p
 - **原文 vs 解读双栏对照**（核心观点必须双栏）
 - **他山之石融入各模块做对照**（不单独成章）
 
+**v2.1 加深增量**：
+- 单模块字数 ≥ **4500**（§1.2 v2.1，**人物/场景重模块 ≥6000**）——不达标说明推导没展开
+- 每模块原文锚点（quote_pairs）≥ **6**（§1.4 v2.1），全书总数 ≥ **50**（§1.3 v2.1，巨著 ≥ **80**）
+
+**v2.2 排版增量（§10）**：
+- **长字段必须分段**——≥600 字 ≥3 段，≥1500 字 ≥4 段，≥3000 字 ≥5 段。推荐用 v2.2 格式 B（`{paragraphs: [...]}`）或格式 C（`[{subhead, body}]`）显式分段；用纯字符串时按「第N组事实/第N层/其N」开头切段
+- **关键短语标记**——重要术语、引文、命运关键词用「」标记，render.py 自动渲染为 `.kw` 朱砂高亮（单模块 ≥5 处，场景/人物模块 ≥10 处）
+- **derivation_chain 强制 ≥4 步**——render.py 渲染为视觉编号列表，是 viewpoint 层的视觉重心
+- **不要在 distill.json 里写 HTML 标签**——所有视觉层级由 schema 结构 + CSS 提供
+- **单条原文锚点 original ≥ 100 字**（§1.4b v2.1，巨著场景类 ≥150 字）
+- 每模块必须有 `external_counterpoints` ≥ **2**（§1.13 v2.1）——不是单边宣读
+- viewpoint_layer 必须含 `derivation_chain` ≥ **4 步**（§3 v2.1）——不允许"事实跳到结论"
+- **scene_dissections 每条 ≥1000 字**（§2.6 v2.1，5 层拆解：blocking/language/sensorium/subtext/structural_function）
+- **character_dossiers 每条 ≥600 字**（§2.7 v2.1，8 子字段聚合跨章节）
+
 ### 步骤 8 · 质量自检（两道闸门）
 
 **闸门一 · 内容自检**（在渲染 HTML 前）：
@@ -205,16 +248,24 @@ description: Distill a book's essence into a single elegant Chinese-style HTML p
 python3 scripts/quality_check.py <path-to-distill.json>
 ```
 
-检查硬红线：
+检查硬红线（**v2.1 阈值全面升级**，详见 `references/deepening-protocol.md` §1）：
 - [ ] 结构完整性（schema 齐全）
 - [ ] 信源透明度标注完整
-- [ ] 事实锚点充足（含 facts_layer 里带章节/年份的软锚点）
+- [ ] 原文锚点 ≥ **50**（§1.3 v2.1，巨著 ≥**80**；每模块 ≥**6** §1.4 v2.1）
+- [ ] **单条原文锚点 original ≥ 100 字**（§1.4b v2.1）
 - [ ] 正文出现框架名次数 = 0（工具箱除外；历史人物姓名允许）
-- [ ] 误读陷阱 ≥ 2 条
-- [ ] 作者盲点 ≥ 2 条
-- [ ] 金句 ≥ 5 条，记忆抓手 1 条
-- [ ] 每个模块三重结构完整（facts / mechanism / viewpoint）
+- [ ] 误读陷阱 ≥ **6** 条（§1.5 v2.1）
+- [ ] 作者盲点 ≥ **6** 条（§1.6 v2.1）
+- [ ] 金句 ≥ **12** 条，记忆抓手 1 条（§1.7 v2.1）
+- [ ] 每个模块三重结构完整（facts / mechanism / viewpoint），含 **derivation_chain ≥4 步**（§3 v2.1）
+- [ ] 单模块字数 ≥ **4500**（§1.2 v2.1，人物/场景重模块 ≥6000）
+- [ ] 事实矩阵 cells ≥ **20**（§1.8 v2.1）
+- [ ] 思想坐标四维各 ≥ **4** 条（§1.9-1.12 v2.1）
+- [ ] author_position_deconstruction 必填，evidence ≥ 3
+- [ ] 适用书：学派 ≥ 3 派 / 版本 ≥ 5 处 / 章节 ≥ **12** 回（每条 ≥600 字）/ **scene_dissections ≥ 5（巨著 ≥8）/ character_dossiers ≥ 5（巨著 ≥10）/ poetics_dossiers ≥ 3**（按 §4 适用性 v2.1 含 §4.4-§4.6）
 - [ ] 语感 checklist 违规 = 0
+
+老 v1/v2 distill.json（无 v2.1 新字段）跑会得"降级警告"而不是 fail——可用 `--legacy` flag 切回 v1 阈值。
 
 **闸门二 · 视觉级自检**（渲染 HTML 后，必做）：
 
@@ -222,15 +273,17 @@ python3 scripts/quality_check.py <path-to-distill.json>
 python3 scripts/visual_check.py <rendered.html>
 ```
 
-检查项：
+检查项（**v2.1 阈值全面升级**）：
 - [ ] **三模式差异化**：速读 < 精读 < 深读，且
   - 精读 ≥ 速读 × 1.3（精读必须显著超过速读）
-  - 深读 ≥ 精读 × 1.2（深读必须显著超过精读）
-  - 否则说明 CSS class 分配错了——这是 v1 的 Bug，再犯就不合格
+  - 深读 ≥ 精读 × **1.35**（§1.16；深读必须有显著独占内容；典型应达 1.4-1.5）
+  - 否则说明 CSS class 分配错了
 - [ ] **SVG 尺寸合规**：无固定 width/height，viewBox 齐全，不会缩成火柴盒
+- [ ] **可视化类型 ≥ 3**（§1.17 v2.1）：事实矩阵 + 至少 2 种新类型（时间轴/关系图/流变图/频谱图）
 - [ ] **9 大板块齐全**：卷首/全貌/事实矩阵/主干/金句/误读/盲点/坐标/工具箱
+- [ ] **v2.1 新模块渲染存在**（如有数据）：学派论争/版本差异/作者立场解构/章节级覆盖/思想坐标四维 + **场景细读 / 人物小传 / 诗词专题**（v2.1 三新模块）
 - [ ] **三层结构对齐**：facts/mech/view 数量一致
-- [ ] **原文对照 ≥ 6 组，他山之石 ≥ 2 处**
+- [ ] **原文对照 ≥ 50 组（巨著 ≥80）/ 单条 ≥100 字 / 他山之石 ≥ 2 处每模块**（v2.1 提升）
 
 **两闸门都过才算合格**。任一闸门不达标，回到对应步骤改：
 - quality_check 红 → 回步骤 5-7 改内容/写作
@@ -283,17 +336,42 @@ python3 scripts/visual_check.py <rendered.html>
 
 ## References 索引
 
+**核心宪法层**
 - `references/core-thesis.md` — 核心主旨详述
+- `references/deepening-protocol.md` — ⭐ v2.1 加深协议总纲（所有硬下限和 8 个新字段定义）
+
+**方法论层**
 - `references/fact-systematization.md` — 事实系统化四步法 ⭐
-- `references/genes.md` — 七基因 + 坐标系 + 组件库
-- `references/skeletons/` — 五种主基因下的骨架模板
 - `references/frameworks-internalization.md` — 二阶段写作法
 - `references/source-triangulation.md` — 信源分级
+
+**v2 新增协议细则**
+- `references/thought-coordinates-protocol.md` — ⭐ 思想坐标四维填法（v2.1 各维 ≥4 条）
+- `references/schools-and-versions.md` — ⭐ 学派论争 + 版本差异适用性规则
+- `references/chapter-level-coverage.md` — ⭐ 章节级覆盖触发与降级方案（v2.1 长书 ≥12 / 中等 ≥8）
+
+**v2.1 新增专题协议**
+- `references/scene-dissection-protocol.md` — ⭐ 场景细读 5 层拆解协议（§2.6，小说/史书 STRICT ≥5）
+- `references/character-dossier-protocol.md` — ⭐ 人物小传 8 子字段协议（§2.7，人物书 STRICT ≥5）
+- `references/poetics-dossier-protocol.md` — ⭐ 诗词曲赋专题协议（§2.8，含诗词的书 STRICT ≥3）
+
+**结构与组件**
+- `references/genes.md` — 七基因 + 坐标系 + 组件库
+- `references/skeletons/` — 五种主基因下的骨架模板（v2.1 已升级）
 - `references/misreading-and-blindspots.md` — 误读样例库
+
+**视觉与语感**
 - `references/language-quality-checklist.md` — 语感规范
 - `references/style-guide.md` — 典雅风视觉规范
 - `references/lens-calibration.md` — 视角自适应
-- `references/examples/` — 三本典型书的骨架示例
+- `assets/svg-templates/` — v2 新增 4 种可视化模板（时间轴/关系图/流变图/频谱图）
+
+**示范**
+- `references/examples/` — 骨架示范：
+  - `hongloumeng-skeleton.md` ⭐ v2 加深版旗舰示范（巨著全适用）
+  - `jinpingmei-skeleton.md`（v2 升级）
+  - `yuanyuan-jiushizhu-skeleton.md`（v2 升级）
+  - `feibaoli-goutong-skeleton.md`（v2 升级·工具书克制版）
 
 ---
 

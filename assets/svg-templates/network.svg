@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="关系网络">
+  <style>
+    .net-edge {
+      stroke: #1a1a1a;
+      stroke-width: 1;
+      fill: none;
+      opacity: 0.55;
+    }
+    .net-edge-key {
+      stroke: #b8281f;
+      stroke-width: 1.4;
+      fill: none;
+      opacity: 0.8;
+    }
+    .net-node {
+      fill: #f9f5ec;
+      stroke: #1a1a1a;
+      stroke-width: 1;
+    }
+    .net-node-key {
+      fill: #f9f5ec;
+      stroke: #b8281f;
+      stroke-width: 1.6;
+    }
+    .net-label {
+      font-family: "Songti SC", "宋体", "Noto Serif SC", serif;
+      font-size: 13px;
+      fill: #1a1a1a;
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+    .net-label-key {
+      font-family: "Kaiti SC", "KaiTi", "楷体", serif;
+      font-size: 14px;
+      fill: #b8281f;
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+  </style>
+
+  <!-- 边 (placeholder · 由 render.py 用 {{EDGES}} 注入；先画边再画节点确保节点在上) -->
+  {{EDGES}}
+
+  <!-- 节点 + 标签 (placeholder · 由 render.py 用 {{NODES}} 注入) -->
+  {{NODES}}
+</svg>

@@ -1,4 +1,6 @@
-# 示例 · 遥远的救世主 骨架
+# 示例 · 遥远的救世主 骨架（v2 加深版示范）
+
+> **v2 加深版示范** —— 本文件已按 `references/deepening-protocol.md` 增量加深。v1 内容完整保留，文末 v2 增量段补全 5 个新字段。本书是当代论证型小说，按 §4 适用性：学派论争（解读流派分化）✅触发；版本变异 ⚠️ 不强适用（基本单一版本，可降级为"访谈版本/影视版本之间的解读偏移"）；作者立场 ✅强制；章节级 → 主题级降级（≥5 主题）；思想坐标 ✅四维。
 
 基因：**人物 + 叙事 + 论证(主)**
 
@@ -150,3 +152,165 @@ toolbox:
 4. **批判性呈现**：作者盲点专列一节（东方神秘主义 + 女性工具化 + 精英视角）
 5. **系统逻辑明确**：文化属性的三层硬度 SVG
 6. **框架内化**：商战分析不提"博弈论"名字，留在 toolbox
+
+---
+
+## v2 加深增量段（per `references/deepening-protocol.md`）
+
+### v2.1 · `schools_of_interpretation`（per §2.1，本书适用性中等：解读流派已分化 → 视为弱学派 ≥3）
+
+```yaml
+schools_of_interpretation:
+  - school: 商战派
+    core_position: 把本书当商战教科书读，重点研究格律诗与乐圣之战的策略层
+    key_figures: [财经媒体, 创投圈大众读者, 各路"丁元英商业模型"自媒体解读人]
+    evidence_anchors:
+      - source: 各类商学院案例分析、自媒体长文
+        summary: 把"鲶鱼效应""阳谋设计""信息差利用"提取为可复用的商业方法
+    our_judgment: 部分采纳——商战策略确实精妙，但仅在策略层读小说会丢失"文化属性"的哲学维度
+
+  - school: 文化属性派（豆豆原意派）
+    core_position: 文化属性是全书核心命题，所有人物都是这一命题的演示
+    key_figures: [豆豆本人（在访谈中明示）, 较深度的读者群体]
+    evidence_anchors:
+      - source: 丁元英对韩楚风的"强弱文化"独白
+        summary: 这是作者借人物之口的命题宣言
+      - source: 豆豆访谈
+        summary: 作者多次明示创作本书是为论证"文化属性决定命运"
+    our_judgment: 采纳——这是回到作者原意的解读，本骨架的主线即此派
+
+  - school: 哲学派（佛道儒混读）
+    core_position: 把"天道无道、神即道、道法自然、如来"作为东方哲学的当代表达
+    key_figures: [禅宗 / 道家修行群体读者, 部分佛学论坛]
+    evidence_anchors:
+      - source: 全书"五台山论道""神即道"等段落
+        summary: 借丁元英之口论证东方哲学的当代价值
+    our_judgment: 存疑——豆豆把佛道儒混用，并非严谨哲学论述；哲学派读者易把小说修辞误读为修行指南
+```
+
+### v2.2 · `version_variants`（per §2.2 适用性弱化：本书无版本之争，但可写"访谈与不同传播版本之间的解读偏移"）
+
+```yaml
+version_variants:
+  applicability_note: |
+    本书是 21 世纪初出版的当代小说，主要版本基本一致（豆豆原作）。
+    严格意义的版本对照不适用（per §4.2）。
+    但豆豆访谈、电视剧《天道》改编版、网络解读版之间存在
+    "传播变形"——可视为弱意义的"版本变异"。
+  variants:
+    - version_a: 原著小说
+      version_b: 电视剧《天道》（王志文主演）
+      diff_locus: 整体改编
+      diff_content: 电视剧对小说做了大量删减与改编，丁元英的"哲思独白"被压缩，重点放在商战与情感线
+      interpretive_significance: 电视剧的传播让本书大众化，但"文化属性"哲学维度被稀释——这是大众化与思想深度的张力
+    - version_a: 豆豆原著三部曲（《遥远的救世主》《天幕红尘》《背叛》）
+      version_b: 单读《遥远的救世主》
+      diff_locus: 三部曲互文 vs 单本
+      diff_content: 三部曲合读时"文化属性"概念有更完整的演化（从《背叛》→《遥远的救世主》→《天幕红尘》）
+      interpretive_significance: 单本读会错过作者命题的渐进发展，特别是《天幕红尘》对"实事求是"的进一步阐释
+```
+
+### v2.3 · `author_position_deconstruction`（per §2.3，所有书强制）
+
+```yaml
+author_position_deconstruction:
+  class_position: 商业-哲学-文学跨界的边缘知识分子立场
+  knowledge_boundary: 商业实务、佛道哲学、东方文化精通；西方哲学、社会科学结构化训练较弱
+  writing_motive_shadow: 既要论证"强势文化"的优越，又要避免被指控为精英主义；既要展示佛道智慧，又要保持小说的可读性
+  evidence:
+    - facet: class
+      anchor: 豆豆访谈中提及自己长期从事金融投资工作，又对哲学有持续兴趣
+      elaboration: 这种跨界位置决定了她写得了商战的实操，又写得了禅意的独白；但也决定了她两边都不够极致
+    - facet: knowledge
+      anchor: 全书"佛道儒混用"的处理方式
+      elaboration: 豆豆把"天道""自性""如来"等概念混合使用，没有做严格的哲学区分——这是哲学训练欠缺的体现
+    - facet: motive
+      anchor: 丁元英作为"近乎全能"的主角设定 + 芮小丹作为"悟道陪衬"的设定
+      elaboration: 作者既想塑造一个"东方智者"标本，又要让普通读者能进入故事——这种张力让丁元英常常游走在"现实人物"与"哲学符号"之间
+```
+
+### v2.4 · `chapter_level_notes` → 降级为主题级（per §2.4 中等长度书降级方案，≥5 主题）
+
+```yaml
+chapter_level_notes:
+  applicability_note: 本书 30 万字以下，按 §4.3 中等长度书降级为主题级 ≥5 主题
+  themes:
+    - chapter: 主题一 · 文化属性的命名（开篇至五台山论道）
+      anchor_event: 丁元英对韩楚风的"强弱文化"独白；后续在五台山与智玄大师论道
+      interpretation: 全书的核心命题在前 1/3 处就已和盘托出。作者不留悬念地把"文化属性决定命运"挂出来，让后续情节成为这一命题的演示场。这种"先立论再演示"的结构是论证型小说的典型做法。
+    - chapter: 主题二 · 王庙村的扶贫实验
+      anchor_event: 丁元英帮助王庙村制作音响、对抗乐圣
+      interpretation: 王庙村的设计是"强势文化对弱势文化的实验"。冯世杰、叶晓明、刘冰三人的不同反应展示了"弱势文化"的内部分层。这是全书对"觉醒"过程最完整的演示。
+    - chapter: 主题三 · 格律诗对乐圣的商战
+      anchor_event: 价格陷阱、商标侵权诉讼、林雨峰自杀
+      interpretation: 格律诗 vs 乐圣的对决是"文化属性"在商业场域的具体演示。丁元英的胜利不是因为更聪明，而是因为他"不下场只设局"——把对方的反应预先计入棋谱。
+    - chapter: 主题四 · 芮小丹的觉醒与殉职
+      anchor_event: 芮小丹悟道后选择以警察身份殉职
+      interpretation: 芮小丹的死是全书最具争议的安排。作者用她的死证明"觉者不畏死"，但也被批评为"为悟道而设计的工具人"。她的命运反映了作者对"自性圆满"的极端表达。
+    - chapter: 主题五 · 叶晓明的退出与刘冰的坠楼
+      anchor_event: 三个王庙村合伙人在乐圣反诉时的不同反应
+      interpretation: 三人的分岔是全书对"觉醒程度"的精确测量。叶晓明退出是"看不懂局"的诚实，刘冰要求文件是"贪而不智"，冯世杰留下是"信任但不理解"。三人命运成为"弱势文化内部分层"的标本。
+    - chapter: 主题六 · 五台山论道
+      anchor_event: 丁元英与智玄大师的对话
+      interpretation: 五台山论道是全书哲学层面的高峰，也是争议最多的段落。作者借此把"佛家"与"文化属性论"嫁接——但学界普遍认为豆豆对禅宗的理解偏文学化。
+```
+
+### v2.5 · 强化 `thought_coordinates`（四维各 ≥3）
+
+```yaml
+thought_coordinates:
+  同题延伸:
+    - referenced_work: 教父
+      referenced_author: 马里奥·普佐
+      position: 另一种"强势文化"的人格刻画——黑手党家族的规则世界
+      relation_to_book: 维多·柯里昂与丁元英都体现"在自己的规则系统中绝对自洽"的强势文化人格
+    - referenced_work: 三体
+      referenced_author: 刘慈欣
+      position: 同样是当代中文长篇对"强者书写"的尝试
+      relation_to_book: 罗辑、章北海、维德等"执剑人"角色与丁元英共享"为达目的不被情绪牵绊"的人格特征
+    - referenced_work: 少有人走的路
+      referenced_author: M·斯科特·派克
+      position: 派克"难走的路"与豆豆"强势文化"在动机层有相似——都强调对自我的诚实
+      relation_to_book: 派克从精神病学角度，豆豆从文化属性角度，殊途同归
+  对立视角:
+    - referenced_work: 乌合之众
+      referenced_author: 古斯塔夫·勒庞
+      position: 对群体（弱势文化的载体）的悲观判断
+      relation_to_book: 勒庞认为群体不可救药；豆豆认为弱势文化可以"觉知到、运用到"
+    - referenced_work: 人性的弱点
+      referenced_author: 戴尔·卡耐基
+      position: 人性论 vs 文化属性论
+      relation_to_book: 卡耐基认为人性是普世的弱点，可通过技巧改善；豆豆认为问题不在人性而在文化结构
+    - referenced_work: 反脆弱
+      referenced_author: 塔勒布
+      position: 强调"在不确定性中受益"的策略主义
+      relation_to_book: 塔勒布反对"全知全能"型规划，丁元英则代表了高度规划的极致——两者立场相反
+  承继关系:
+    - referenced_work: 尼采《查拉图斯特拉如是说》
+      referenced_author: 尼采
+      position: "超人"哲学的源流
+      relation_to_book: 丁元英身上有明显的尼采式"超人"气质——独立于群众的价值标准
+    - referenced_work: 老子《道德经》
+      referenced_author: 老子
+      position: "道法自然"的东方源流
+      relation_to_book: 丁元英在五台山论道、对芮小丹的诸多独白都直接化用《道德经》
+    - referenced_work: 禅宗经典
+      referenced_author: 慧能 / 临济
+      position: "明心见性""自性圆满"的禅修传统
+      relation_to_book: 豆豆把禅宗"自性"概念引入文化属性论，但做了文学化处理
+  现代回响:
+    - referenced_work: 当代商业精英书写（吴晓波、罗振宇等的作品）
+      referenced_author: 商业知识 IP 群体
+      position: "认知决定命运"是这一波书写的共同主题
+      relation_to_book: 当代"认知决定论"是豆豆"文化属性论"的大众化变体
+    - referenced_work: 创投圈"认知"话语
+      referenced_author: 投资人群体
+      position: 把"认知差"作为投资优势的核心
+      relation_to_book: 这是丁元英"信息差 + 决策差"在投资世界的具体应用
+    - referenced_work: 短视频时代的"丁元英语录"
+      referenced_author: 多个自媒体账号
+      position: 把丁元英独白拆成 30 秒金句的传播现象
+      relation_to_book: 这种碎片化传播让"文化属性"概念广为人知，但也让其哲学深度被简化
+```
+
+以上为 v2 加深增量。原 v1 内容保留不动。

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="思想流变树">
+  <style>
+    .ev-trunk {
+      stroke: #1a1a1a;
+      stroke-width: 1.2;
+      fill: none;
+    }
+    .ev-branch {
+      stroke: #1a1a1a;
+      stroke-width: 1;
+      fill: none;
+      opacity: 0.7;
+    }
+    .ev-branch-key {
+      stroke: #b8281f;
+      stroke-width: 1.2;
+      fill: none;
+    }
+    .ev-root-node {
+      fill: #f9f5ec;
+      stroke: #b8281f;
+      stroke-width: 1.6;
+    }
+    .ev-leaf-node {
+      fill: #f9f5ec;
+      stroke: #1a1a1a;
+      stroke-width: 1;
+    }
+    .ev-root-label {
+      font-family: "Kaiti SC", "KaiTi", "楷体", serif;
+      font-size: 16px;
+      fill: #b8281f;
+      text-anchor: middle;
+      dominant-baseline: middle;
+      letter-spacing: 0.08em;
+    }
+    .ev-leaf-label {
+      font-family: "Songti SC", "宋体", "Noto Serif SC", serif;
+      font-size: 13px;
+      fill: #1a1a1a;
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+    .ev-axis-cap { stroke: #c26d6d; stroke-width: 1; opacity: 0.5; }
+  </style>
+
+  <!-- 顶部源头横线 (装饰) -->
+  <line class="ev-axis-cap" x1="340" y1="40" x2="460" y2="40"/>
+
+  <!-- 根节点 (placeholder · 由 render.py 用 {{ROOT}} 注入；通常为顶部圆 + 标签) -->
+  {{ROOT}}
+
+  <!-- 分支 (placeholder · 由 render.py 用 {{BRANCHES}} 注入；包含连线、子节点、标签) -->
+  {{BRANCHES}}
+</svg>
