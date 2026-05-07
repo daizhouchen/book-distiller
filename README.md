@@ -1,3 +1,13 @@
+<!-- daizhouchen-banner-begin -->
+<p align="center">
+  <img src="assets/hero.png" alt="book-distiller" width="100%"/>
+</p>
+
+> **把一本书蒸馏成一张你愿意打开的网页。HTML 单文件、内含方法论框架。**
+>
+> *distill any book into one elegant single-file HTML page.*
+<!-- daizhouchen-banner-end -->
+
 # Book Distiller · 读书蒸馏
 
 把一本书蒸馏成一张中文典雅风 HTML 网页——**事实支撑观点，揭示系统逻辑，事实陈述本身也要系统化**。
@@ -448,3 +458,9 @@ MIT License — 详见 [LICENSE](LICENSE)。
 > **事实陈述本身也要系统化。**
 
 记住这四句就够了。
+
+---
+<!-- daizhouchen-footer-begin -->
+
+Part of [**daizhouchen 实验集**](https://github.com/daizhouchen) → 一个 AI 应用创造者的实验现场。
+<!-- daizhouchen-footer-end -->
