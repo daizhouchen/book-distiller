@@ -1,6 +1,6 @@
 ---
 name: book-distiller
-description: Distill a book's essence into a single elegant Chinese-style HTML page that reveals the book's systematic logic through fact-supported reasoning. Use this skill whenever the user mentions distilling, summarizing, analyzing, extracting the essence of, or producing a study page for a specific book — even when they don't explicitly say "use this skill". Also use when the user wants to "蒸馏"/"提炼"/"解读"/"吃透"/"拆解"/"读书笔记" a book. Handles Chinese and foreign books, classic and modern, fiction and non-fiction. Produces a portable, offline, single-file HTML in elegant Chinese typography (典雅风). Works without access to the book text (falls back to web search + model knowledge with transparent source grading).
+description: Create a source-grounded Chinese HTML study page for a specific book. Use for structured book distillation, deep reading notes, or a requested book study page. Match the requested depth; brief summaries and individual questions about a book do not require the full workflow.
 ---
 
 # Book Distiller · 读书蒸馏（v2.2 加深版）
@@ -17,6 +17,12 @@ description: Distill a book's essence into a single elegant Chinese-style HTML p
 > - 场景细读 → `references/scene-dissection-protocol.md`
 > - 人物小传 → `references/character-dossier-protocol.md`
 > - 诗词专题 → `references/poetics-dossier-protocol.md`
+
+## 范围与证据优先
+
+用户指定的篇幅、章节和输出形式优先于下方完整深度版的数量目标。只对实际读取的材料声称覆盖；没有原文时标为二手资料解读，不补造引文、章节或页码。引用长度按论证需要和可使用范围控制，不为满足每条 100 字或总量目标拉长摘录；将因此未达成的检查项作为限制报告。
+
+脚本路径均相对本 Skill 所在目录；产物写到用户工作目录。
 
 ## 读书人格（Persona）
 
@@ -98,7 +104,7 @@ description: Distill a book's essence into a single elegant Chinese-style HTML p
 - C 级 = 普通书评/网络观点
 - D 级 = 模型自身知识（须标"未核证"）
 
-**产出开头必须标注信源构成比例**。
+**产出开头必须标注实际取得的信源及覆盖范围**。`source_mix` 按已使用的证据条目计算并说明口径，检索链接不计入已取得资料。
 
 ### 步骤 4 · 事实穷尽式提取
 
@@ -112,7 +118,7 @@ description: Distill a book's essence into a single elegant Chinese-style HTML p
 - 结构性事实（章节编排、时间跨度、视角切换）
 - **沉默性事实**（作者没写什么——常常比写了什么更重要）
 
-穷尽一切。这是红线。
+在已读取的范围内尽量完整提取；未读章节列为覆盖缺口。
 
 **v2.1 加深增量**：长书（>30 万字）必须做章节级扫描——为后续 `chapter_level_notes` 字段（§2.4 v2.1）准备 ≥**12** 个有母题相关性的回目锚点；中等长度书做主题级扫描 ≥**8** 主题。详见 `references/chapter-level-coverage.md`。**小说类必做场景级扫描 ≥8 个 candidate**（per §2.6 v2.1，为后续 `scene_dissections` 字段准备——最终筛选 ≥5 个进入产出，巨著 ≥8）。详见 `references/scene-dissection-protocol.md`。
 
@@ -120,7 +126,7 @@ description: Distill a book's essence into a single elegant Chinese-style HTML p
 
 **这一步决定了产出是零散笔记还是真正的蒸馏**。详见 `references/fact-systematization.md`。
 
-**5.1 维度分类**：按基因对应的坐标系给事实分类（见 `genes.md` 坐标系表）。
+**5.1 维度分类**：按基因对应的坐标系给事实分类（见 `references/genes.md` 坐标系表）。
 
 **5.2 模式识别**：每个维度内部找规律，每个规律至少 3 个事实锚点。
 
@@ -285,7 +291,7 @@ python3 scripts/visual_check.py <rendered.html>
 - [ ] **三层结构对齐**：facts/mech/view 数量一致
 - [ ] **原文对照 ≥ 50 组（巨著 ≥80）/ 单条 ≥100 字 / 他山之石 ≥ 2 处每模块**（v2.1 提升）
 
-**两闸门都过才算合格**。任一闸门不达标，回到对应步骤改：
+**完整深度版应通过两道闸门**。先修复实际结构和渲染错误；因用户范围或证据不足未满足数量项时，明确报告未通过项，不造内容凑数：
 - quality_check 红 → 回步骤 5-7 改内容/写作
 - visual_check 红 → 回步骤 9 改模板/渲染逻辑
 
@@ -319,7 +325,7 @@ python3 scripts/visual_check.py <rendered.html>
 
 1. 先确认输入：用户给了书名？还是书名+文本？还是只有模糊描述？
 2. 按步骤 3 的顺序尝试获取原书文本
-3. **如果原书拿不到且用户没上传，在开始前告知用户**："我没拿到原书文本，只能基于二手资料蒸馏，报告会明确标注置信度。你介意吗？或者你方便上传一下？"
+3. **如果原书拿不到且用户没上传**，说明实际已有资料和缺失章节；可继续产出有来源的二手解读。只有用户要求原文细读而关键原文确实缺失时，才请求补充材料。
 4. 按九步闭环执行
 5. 产出 `distill.json` + `<book>.html` 到 `book-distiller-workspace/<book-slug>/` 目录
 6. 报告生成完成后告诉用户文件路径 + 信源构成 + 置信度自评
